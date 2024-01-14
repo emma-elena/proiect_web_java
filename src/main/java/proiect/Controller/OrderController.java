@@ -21,9 +21,9 @@ public class OrderController {
     @PostMapping()
     public ResponseEntity<Order> create(@RequestBody final CreateOrder order) {
 
-        final boolean isUserReporter = userService.checkUserCustomer(order.getUsername());
+        final boolean isUserCustomer = userService.checkUserCustomer(order.getUsername());
 
-        if (isUserReporter) {
+        if (isUserCustomer) {
             final var savedOrder = service.createOrder(order.getOrder(), order.getUsername());
             return ResponseEntity.ok(savedOrder);
         }
