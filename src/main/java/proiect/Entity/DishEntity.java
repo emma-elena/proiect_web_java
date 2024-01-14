@@ -17,7 +17,7 @@ public class DishEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String name;
+    private String dishName;
     private String description;
     private Double price;
     private Double calories;

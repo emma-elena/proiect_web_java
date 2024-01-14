@@ -18,7 +18,7 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private Integer order_number;
+    private Integer orderNumber;
     private Date orderDate;
 
     @ManyToOne

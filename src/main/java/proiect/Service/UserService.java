@@ -18,7 +18,7 @@ public class UserService {
     private UserMapper mapper;
 
     public User createUser(User user){
-        repository.save(mapper.toEntity(user));
+        repository.save(mapper.toEntity(user));   //Adaugare user in baza de date
         Optional<UserEntity> userEntity= repository.findByUsername(user.getUsername());
         return mapper.toResponse(userEntity.get());
 

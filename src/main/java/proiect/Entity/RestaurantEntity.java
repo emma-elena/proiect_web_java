@@ -17,6 +17,6 @@ public class RestaurantEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String name;
+    private String restaurantName;
     private String description;
 }
