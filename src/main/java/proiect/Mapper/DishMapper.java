@@ -10,6 +10,9 @@ public class DishMapper {
         Dish response = new Dish();
 
         response.setDishName(dish.getDishName());
+        response.setDescription(dish.getDescription());
+        response.setPrice(dish.getPrice());
+        response.setCalories(dish.getCalories());
 
         return response;
     }
@@ -18,6 +21,9 @@ public class DishMapper {
         DishEntity dishEntity = new DishEntity();
 
         dishEntity.setDishName(dish.getDishName());
+        dishEntity.setDescription(dish.getDescription());
+        dishEntity.setPrice(dish.getPrice());
+        dishEntity.setCalories(dish.getCalories());
 
         return dishEntity;
     }

@@ -17,8 +17,8 @@ public class OrderService {
     @Autowired
     private OrderMapper mapper;
 
-    public Order createOrder(Order order){
-        repository.save(mapper.toEntity(order));
+    public Order createOrder(Order order, String username){
+        repository.save(mapper.toEntity(order, username));
         Optional<OrderEntity> orderEntity= repository.findByOrderNumber(order.getOrderNumber());
         return mapper.toResponse(orderEntity.get());
 

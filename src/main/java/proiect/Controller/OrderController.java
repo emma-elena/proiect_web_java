@@ -6,18 +6,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import proiect.Micunelte.CreateOrder;
 import proiect.Micunelte.Order;
 import proiect.Service.OrderService;
+import proiect.Service.UserService;
 
 @RestController
 @RequestMapping("/order")
 public class OrderController {
     @Autowired
     private OrderService service;
+    @Autowired
+    private UserService userService;
 
     @PostMapping()
-    public ResponseEntity<Order> create(@RequestBody final Order order) {
-        final var savedOrder = service.createOrder(order);
-        return ResponseEntity.ok(savedOrder);
+    public ResponseEntity<Order> create(@RequestBody final CreateOrder order) {
+        final boolean isUserReporter = userService.checkUserCustomer(order.getUsername());
+        if (isUserReporter) {
+            final var savedOrder = service.createOrder(order.getOrder(), order.getUsername());
+            return ResponseEntity.ok(savedOrder);
+        }
+        return (ResponseEntity<Order>) ResponseEntity.status(401);
     }
 }

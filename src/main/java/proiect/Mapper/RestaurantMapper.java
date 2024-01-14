@@ -10,6 +10,7 @@ public class RestaurantMapper {
         Restaurant response = new Restaurant();
 
         response.setRestaurantName(restaurant.getRestaurantName());
+        response.setDescription(restaurant.getDescription());
 
         return response;
     }
@@ -18,6 +19,7 @@ public class RestaurantMapper {
         RestaurantEntity restaurantEntity = new RestaurantEntity();
 
         restaurantEntity.setRestaurantName(restaurant.getRestaurantName());
+        restaurantEntity.setDescription(restaurant.getDescription());
 
         return restaurantEntity;
     }
