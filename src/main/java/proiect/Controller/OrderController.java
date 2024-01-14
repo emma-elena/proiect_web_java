@@ -2,14 +2,13 @@ package proiect.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import proiect.Micunelte.CreateOrder;
 import proiect.Micunelte.Order;
 import proiect.Service.OrderService;
 import proiect.Service.UserService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/order")
@@ -21,7 +20,9 @@ public class OrderController {
 
     @PostMapping()
     public ResponseEntity<Order> create(@RequestBody final CreateOrder order) {
+
         final boolean isUserReporter = userService.checkUserCustomer(order.getUsername());
+
         if (isUserReporter) {
             final var savedOrder = service.createOrder(order.getOrder(), order.getUsername());
             return ResponseEntity.ok(savedOrder);

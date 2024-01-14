@@ -29,4 +29,9 @@ public class UserService {
         UserEntity user = repository.findByUsername(username).orElseThrow(() -> new UserNotFound("User not found for username " + username));
         return user.getRole().equals(Role.CUSTOMER);
     }
+
+    public User getUser(String username) {
+        UserEntity user = repository.findByUsername(username).orElseThrow(() -> new UserNotFound("User not found for username " + username));
+        return mapper.toResponse(user);
+    }
 }
