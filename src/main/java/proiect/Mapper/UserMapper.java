@@ -24,7 +24,7 @@ public class UserMapper {
         return response;
     }
 
-    public UserEntity toEntity(User user) {
+    public static UserEntity toEntity(User user) {
         UserEntity userEntity = new UserEntity();
 
         userEntity.setName(user.getName());
