@@ -10,7 +10,6 @@ public class UserMapper {
     public User toResponse(UserEntity user) {
         User response = new User();
 
-        response.setId(user.getId());
         response.setName(user.getName());
         response.setUsername(user.getUsername());
         response.setEmail(user.getEmail());

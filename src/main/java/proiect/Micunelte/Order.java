@@ -11,8 +11,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 public class Order {
-    private UUID id;
-
     private Integer orderNumber;
     private Date orderDate;
 }

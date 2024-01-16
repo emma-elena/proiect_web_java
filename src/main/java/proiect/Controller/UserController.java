@@ -85,11 +85,11 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{username}")
-    public void deleteUser(@PathVariable String username, @RequestBody AdminUsername adminUsername) {
+    @DeleteMapping("/{username}/{adminUsername}")
+    public void deleteUser(@PathVariable String username, @PathVariable String adminUsername) {
 
 
-        final boolean isUserAdministrator = service.checkUserAdministrator(adminUsername.getAdminUsername());
+        final boolean isUserAdministrator = service.checkUserAdministrator(adminUsername);
 
         if (isUserAdministrator) {
             service.deleteUser(username);
