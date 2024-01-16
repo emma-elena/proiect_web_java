@@ -30,7 +30,7 @@ public class UserEntity {
 
     private Role role;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "orders", nullable = true)
     private List<OrderEntity> orders;
 }

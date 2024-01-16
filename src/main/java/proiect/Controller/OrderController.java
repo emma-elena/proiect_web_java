@@ -3,6 +3,7 @@ package proiect.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import proiect.Exceptions.Unauthorised;
 import proiect.Micunelte.CreateOrder;
 import proiect.Micunelte.Order;
 import proiect.Service.OrderService;
@@ -27,6 +28,8 @@ public class OrderController {
             final var savedOrder = service.createOrder(order.getOrder(), order.getUsername());
             return ResponseEntity.ok(savedOrder);
         }
-        return (ResponseEntity<Order>) ResponseEntity.status(401);
+        else{
+            throw new Unauthorised("Not allowed to create order");
+        }
     }
 }

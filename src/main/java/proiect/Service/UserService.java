@@ -31,6 +31,11 @@ public class UserService {
         return user.getRole()==(Role.CUSTOMER);
     }
 
+    public boolean checkUserDeliverer(String deliverer) {
+        UserEntity user = repository.findByUsername(deliverer).orElseThrow(() -> new UserNotFound("User not found for username " + deliverer));
+        return user.getRole()==(Role.DELIVERER);
+    }
+
     public boolean checkUserAdmnistrator(String username) {
         UserEntity user = repository.findByUsername(username).orElseThrow(() -> new UserNotFound("User not found for username " + username));
         return user.getRole()==(Role.ADMINISTRATOR);

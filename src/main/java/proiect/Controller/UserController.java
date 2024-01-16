@@ -3,10 +3,8 @@ package proiect.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import proiect.Micunelte.AdminUsername;
-import proiect.Micunelte.Order;
-import proiect.Micunelte.UpdateLocation;
-import proiect.Micunelte.User;
+import proiect.Exceptions.Unauthorised;
+import proiect.Micunelte.*;
 import proiect.Service.UserService;
 
 @RestController
@@ -17,9 +15,34 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<User> create(@RequestBody final User user) {
-        final var savedUser = service.createUser(user);
-        return ResponseEntity.ok(savedUser);
+        if(user.getRole().equals(Role.DELIVERER)){
+            throw new Unauthorised("A deliverer cannot create account by themselves");
+        }
+        else{
+            final var savedUser = service.createUser(user);
+            return ResponseEntity.ok(savedUser);
+        }
     }
+
+    @PostMapping("/createDeliverer/{adminUsername}")
+    public ResponseEntity<User> createDeliverer(@PathVariable String adminUsername, @RequestBody final User user) {
+        final boolean isAdmnistrator = service.checkUserAdmnistrator(adminUsername);
+
+        if(isAdmnistrator){
+            if(user.getRole().equals(Role.DELIVERER)){
+                final var savedUser = service.createUser(user);
+                return ResponseEntity.ok(savedUser);
+            }
+            else {
+                throw new Unauthorised("Unauthorised to create anything but a deliverer");
+            }
+        }
+        else{
+           throw new Unauthorised("Unauthorised to create deliverer");
+        }
+    }
+
+
 
     @GetMapping("/{username}")
     public User getUsername(@PathVariable String username) {
@@ -35,7 +58,9 @@ public class UserController {
             final var updatedUser = service.updateLocation(updateLocation);
             return ResponseEntity.ok(updatedUser);
         }
-        return (ResponseEntity<User>) ResponseEntity.status(401);
+        else{
+            throw new Unauthorised("Not allowed to update location");
+        }
     }
 
     @DeleteMapping("/{username}")
@@ -46,6 +71,9 @@ public class UserController {
 
         if (isUserAdministrator) {
             service.deleteUser(username);
+        }
+        else{
+            throw new Unauthorised("Not allowed to delete user");
         }
     }
 }
