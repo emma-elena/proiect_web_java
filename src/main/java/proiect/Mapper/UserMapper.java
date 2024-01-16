@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import proiect.Entity.UserEntity;
 import proiect.Micunelte.Role;
 import proiect.Micunelte.User;
-
+//mapper ia din baza de date o entitate si o transforma in chestia pe care o folosesc in cod
 @Component
 public class UserMapper {
     public User toResponse(UserEntity user) {

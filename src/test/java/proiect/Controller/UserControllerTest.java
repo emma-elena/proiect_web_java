@@ -40,7 +40,7 @@ public class UserControllerTest {
     private UpdateLocation updateLocation;
     private UpdateDelivererInfo updateDelivererInfo;
 
-    @BeforeEach
+    @BeforeEach //inainte de orice test se apeleaza setUp
     void setUp() {
         administrator = new User("name", "username1", "emailPatron@email.com", "Parola123", "0737057469", "adresa1", "B999BBB", Role.ADMINISTRATOR);
         customer = new User("nameClient", "username2", "email@email.com", "Parola1234", "0722222223", "adresa2", "B999BBC", Role.CUSTOMER);
@@ -51,10 +51,10 @@ public class UserControllerTest {
     @Test
     void createAdministratorTest() throws Exception {
         mockMvc.perform(post("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(administrator)))
+                .contentType(MediaType.APPLICATION_JSON) //pentru JSON
+                .content(objectMapper.writeValueAsString(administrator))) //transforma administratorul de il declar mai sus din interfata user in JSON
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.username").value("username1"));
+                .andExpect(jsonPath("$.username").value("username1")); //verific ca ce primesc inapoi este chiar username1, adica administratorul
     }
 
     @Test

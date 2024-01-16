@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @PostMapping()
+    @PostMapping() //PostMapping este tipul de request cu path in () unde este cazul; pt a face diferenta intre mai multe tipuri de request de acelasi fel, pun in () path diferit in functie de necesitati
     public ResponseEntity<User> create(@RequestBody final User user) {
         if(user.getRole().equals(Role.DELIVERER)){
             throw new Unauthorised("A deliverer cannot create account by themselves");
@@ -24,7 +24,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/createDeliverer/{adminUsername}")
+    @PostMapping("/createDeliverer/{adminUsername}")//path variable intre {} pe care il declar imediat dupa; mai intai pun path variable si dupa orice altceva
     public ResponseEntity<User> createDeliverer(@PathVariable String adminUsername, @RequestBody final User user) {
         final boolean isAdmnistrator = service.checkUserAdministrator(adminUsername);
 
@@ -43,7 +43,7 @@ public class UserController {
     }
 
 
-
+    //Get si delete nu pot avea RequestBody
     @GetMapping("/{username}")
     public User getUsername(@PathVariable String username) {
         return service.getUser(username);
@@ -52,6 +52,7 @@ public class UserController {
     @PutMapping()
     public ResponseEntity<User> updateLocation(@RequestBody final UpdateLocation updateLocation)
     {
+        //verifica daca persoana care vrea sa faca request este autorizata sau nu
         final boolean isUserCustomer = service.checkUserCustomer(updateLocation.getUsername());
 
         if (isUserCustomer) {

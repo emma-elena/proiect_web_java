@@ -10,15 +10,15 @@ import proiect.Micunelte.Role;
 import java.util.List;
 import java.util.UUID;
 
-@Data
+@Data //imi permite sa folosesc .getUserId fara sa mai scriu eu functiile in spate, este deja functia oferita de aceasta adnotare
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity //baza de date are nevoie de entitati ca sa faca o baza de date
 @Table(name="USERS")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private UUID id; //uuid ca sa fie id-ul unic
 
     private String name;
     private String username;
@@ -31,6 +31,6 @@ public class UserEntity {
     private Role role;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "orders", nullable = true)
+    @JoinColumn(name = "orders", nullable = true) //un user poate sa aiba mai multe orders
     private List<OrderEntity> orders;
 }

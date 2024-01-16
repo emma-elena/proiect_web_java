@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;
-
+//nu ma folosesc in cod de chestiile din entity, sa fac chestii cu BD, asa ca imi creez separat
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

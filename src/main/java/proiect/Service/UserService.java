@@ -27,6 +27,10 @@ public class UserService {
         return mapper.toResponse(userEntity.get());
     }
 
+    //dupa username il caut in baza de date si cand il scot din BD ii verific rolul
+    //ma folosesc de repository care este direct conectat la BD, ma folosesc de repository ca sa findByUsername si verifica daca exista
+    //daca nu exista, arunca o exceptie cu orElseThrow()
+    //la orElseThrow se opreste tot si doar returneaza mesajul stabilit, nu mai proceseaza mai departe, nu mai conteaza ce vine dupa
     public boolean checkUserCustomer(String username) {
         UserEntity user = repository.findByUsername(username).orElseThrow(() -> new UserNotFound("User not found for username " + username));
         return user.getRole()==(Role.CUSTOMER);
