@@ -6,6 +6,7 @@ import proiect.Entity.UserEntity;
 import proiect.Exceptions.UserNotFound;
 import proiect.Mapper.UserMapper;
 import proiect.Micunelte.Role;
+import proiect.Micunelte.UpdateDelivererInfo;
 import proiect.Micunelte.UpdateLocation;
 import proiect.Micunelte.User;
 import proiect.Repository.UserRepository;
@@ -36,7 +37,7 @@ public class UserService {
         return user.getRole()==(Role.DELIVERER);
     }
 
-    public boolean checkUserAdmnistrator(String username) {
+    public boolean checkUserAdministrator(String username) {
         UserEntity user = repository.findByUsername(username).orElseThrow(() -> new UserNotFound("User not found for username " + username));
         return user.getRole()==(Role.ADMINISTRATOR);
     }
@@ -49,6 +50,13 @@ public class UserService {
     public User updateLocation(UpdateLocation updateLocation) {
         UserEntity user = repository.findByUsername(updateLocation.getUsername()).orElseThrow(() -> new UserNotFound("User not found for username " + updateLocation.getUsername()));
         user.setDeliveryAddress(updateLocation.getLocation());
+        repository.save(user);
+        return mapper.toResponse(user);
+    }
+
+    public User updateCarRegistrationNumber(UpdateDelivererInfo updateDelivererInfo) {
+        UserEntity user = repository.findByUsername(updateDelivererInfo.getDelivererUsername()).orElseThrow(() -> new UserNotFound("User not found for username " + updateDelivererInfo.getDelivererUsername()));
+        user.setCarRegistrationNumber(updateDelivererInfo.getCarRegistrationNumber());
         repository.save(user);
         return mapper.toResponse(user);
     }

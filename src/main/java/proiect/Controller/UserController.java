@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping("/createDeliverer/{adminUsername}")
     public ResponseEntity<User> createDeliverer(@PathVariable String adminUsername, @RequestBody final User user) {
-        final boolean isAdmnistrator = service.checkUserAdmnistrator(adminUsername);
+        final boolean isAdmnistrator = service.checkUserAdministrator(adminUsername);
 
         if(isAdmnistrator){
             if(user.getRole().equals(Role.DELIVERER)){
@@ -63,11 +63,33 @@ public class UserController {
         }
     }
 
+
+    @PutMapping("/updateDelivererInfo/{adminUsername}")
+    public ResponseEntity<User> updateDelivererInfo(@PathVariable String adminUsername, @RequestBody final UpdateDelivererInfo updateDelivererInfo)
+    {
+        final boolean isUserAdministrator = service.checkUserAdministrator(adminUsername);
+
+        if (isUserAdministrator) {
+            final boolean isUserDeliverer= service.checkUserDeliverer(updateDelivererInfo.getDelivererUsername());
+
+            if (isUserDeliverer){
+                final var updatedUser = service.updateCarRegistrationNumber(updateDelivererInfo);
+                return ResponseEntity.ok(updatedUser);
+            }
+            else {
+                throw new Unauthorised("Admin can only update deliverer");
+            }
+        }
+        else{
+            throw new Unauthorised("Not allowed to update deliverer info");
+        }
+    }
+
     @DeleteMapping("/{username}")
     public void deleteUser(@PathVariable String username, @RequestBody AdminUsername adminUsername) {
 
 
-        final boolean isUserAdministrator = service.checkUserAdmnistrator(adminUsername.getAdminUsername());
+        final boolean isUserAdministrator = service.checkUserAdministrator(adminUsername.getAdminUsername());
 
         if (isUserAdministrator) {
             service.deleteUser(username);
