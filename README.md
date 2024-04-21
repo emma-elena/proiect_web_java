@@ -19,3 +19,4 @@ Actions:
 8. Only a customer can order from a restaurant. A deliverer can only deliver, as they can't place an order or make an account on their own, only if it's a customer account, separate from the deliverer account.
 9. The customer can see their order in the history page.
 10. A customer can add a restaurant to their favourite list.
+11. 
