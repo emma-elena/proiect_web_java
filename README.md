@@ -1,7 +1,6 @@
-# PROIECT_PROGRAMARE_WEB_JAVA
 Platforma Food Delivery
 
-Cobzariu Emma-Elena
+Cobzariu Emma-Elena, Oprea Ana
 grupa 405, BDTS
 
 The project illustrates a food delivery app, where the user can create an account and place an order, choose from a variety of restaurants, view their account and change account details. 
@@ -19,4 +18,3 @@ Actions:
 8. Only a customer can order from a restaurant. A deliverer can only deliver, as they can't place an order or make an account on their own, only if it's a customer account, separate from the deliverer account.
 9. The customer can see their order in the history page.
 10. A customer can add a restaurant to their favourite list.
-11. 
