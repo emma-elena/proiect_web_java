@@ -42,7 +42,6 @@ public class UserController {
         }
     }
 
-
     //Get si delete nu pot avea RequestBody
     @GetMapping("/{username}")
     public User getUsername(@PathVariable String username) {
@@ -63,7 +62,6 @@ public class UserController {
             throw new Unauthorised("Not allowed to update location");
         }
     }
-
 
     @PutMapping("/updateDelivererInfo/{adminUsername}")
     public ResponseEntity<User> updateDelivererInfo(@PathVariable String adminUsername, @RequestBody final UpdateDelivererInfo updateDelivererInfo)
@@ -88,8 +86,6 @@ public class UserController {
 
     @DeleteMapping("/{username}/{adminUsername}")
     public void deleteUser(@PathVariable String username, @PathVariable String adminUsername) {
-
-
         final boolean isUserAdministrator = service.checkUserAdministrator(adminUsername);
 
         if (isUserAdministrator) {

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -18,9 +17,13 @@ public class RatingEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private Integer rating;
+    private Integer number;
 
     @OneToOne
     @JoinColumn(name = "order_id", nullable = false)
     private OrderEntity order;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 }
